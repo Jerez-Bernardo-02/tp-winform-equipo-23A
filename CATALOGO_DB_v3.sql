@@ -2,8 +2,7 @@ use master
 go
 create database CATALOGO_P3_DB
 go
-use CATALOGO_P3_DB
-go
+
 USE CATALOGO_P3_DB
 GO
 
