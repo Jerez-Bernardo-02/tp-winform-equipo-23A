@@ -10,7 +10,7 @@ namespace negocio
 {
     public class ArticuloNegocio
     {
-        public List<Articulo> Listar()
+        public List<Articulo> listar()
         {
             List<Articulo> lista = new List<Articulo>();
             AccesoDatos datos = new AccesoDatos();
@@ -43,6 +43,26 @@ namespace negocio
             }
             catch (Exception ex)
             {
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
+
+        public void agregar(Articulo nuevo)
+        {
+            AccesoDatos datos = new AccesoDatos();
+
+            try
+            {
+                datos.setearConsulta("INSERT INTO ARTICULOS (Codigo, Nombre, Descripcion) VALUES ('" + nuevo.Codigo + "', '" + nuevo.Nombre + "', '" + nuevo.Descripcion + "')");
+                datos.ejecutarAccion();
+            }
+            catch (Exception ex)
+            {
+
                 throw ex;
             }
             finally
