@@ -45,5 +45,10 @@ namespace winform_app
         {
             this.Close();
         }
+
+        private void frmAltaArticulo_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
