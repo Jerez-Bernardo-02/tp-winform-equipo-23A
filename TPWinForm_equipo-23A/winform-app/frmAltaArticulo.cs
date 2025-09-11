@@ -29,6 +29,8 @@ namespace winform_app
                 nuevo.Codigo = txtCodigo.Text;
                 nuevo.Nombre = txtNombre.Text;
                 nuevo.Descripcion = txtDescripcion.Text;
+                nuevo.Marca = (Marca)cboMarca.SelectedItem;
+                nuevo.Categoria = (Categoria)cboCategoria.SelectedItem;
 
                 negocio.agregar(nuevo);
                 MessageBox.Show("¡Articulo agregado con exito!");
@@ -48,7 +50,19 @@ namespace winform_app
 
         private void frmAltaArticulo_Load(object sender, EventArgs e)
         {
+            MarcaNegocio marcaNegocio = new MarcaNegocio();
+            CategoriaNegocio categoriaNegocio = new CategoriaNegocio();
 
+            try
+            {
+                cboMarca.DataSource = marcaNegocio.listar();
+                cboCategoria.DataSource = categoriaNegocio.listar();
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.ToString());
+            }
         }
     }
 }
