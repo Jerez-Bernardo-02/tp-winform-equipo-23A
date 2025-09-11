@@ -39,12 +39,8 @@ namespace negocio
                     articulo.Marca.Descripcion = (string)lector["Marca"];
                     articulo.Categoria = new Categoria();
                     articulo.Categoria.Descripcion = (string)lector["Categoria"];
-
-                    articulo.Imagen = new List<Imagen>();
-                    Imagen imagen = new Imagen();
-                    imagen.UrlImagen = (string)lector["UrlImagen"];
-                    articulo.Imagen.Add(imagen);
-
+                    articulo.Imagen = new Imagen();
+                    articulo.Imagen.UrlImagen = (string)lector["UrlImagen"];
                     articulo.Precio = (decimal)lector["Precio"];
 
                     lista.Add(articulo);
