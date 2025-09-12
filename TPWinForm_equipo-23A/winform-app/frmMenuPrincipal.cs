@@ -21,16 +21,31 @@ namespace winform_app
             InitializeComponent();
         }
 
-        private void Form2_Load(object sender, EventArgs e)
+        private void cargar()
         {
             ArticuloNegocio negocio = new ArticuloNegocio();
-            listaArticulos = negocio.listar();
-            dgvArticulos.DataSource = listaArticulos;
-            dgvArticulos.Columns["Id"].Visible = false;
-            dgvArticulos.Columns["Imagen"].Visible = false;
+
+            try
+            {
+                listaArticulos = negocio.listar();
+                dgvArticulos.DataSource = listaArticulos;
+                dgvArticulos.Columns["Id"].Visible = false;
+                dgvArticulos.Columns["Imagen"].Visible = false;
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.ToString());
+            }
+        }
+
+        private void frmMenuPrincipal_Load(object sender, EventArgs e)
+        {
+            cargar();
         }
 
         /// METODOS PARA LAS IMAGENES DEFINIR MAS ADELANTE
+        /// 
 
         private void btnAgregar_Click(object sender, EventArgs e)
         {
@@ -45,6 +60,28 @@ namespace winform_app
             frmAltaArticulo modificar = new frmAltaArticulo(seleccionado);
             modificar.ShowDialog();
 
+        }
+
+        private void btnEliminar_Click(object sender, EventArgs e)
+        {
+            ArticuloNegocio negocio = new ArticuloNegocio();
+            Articulo seleccionado;
+
+            try
+            {
+                DialogResult respuesta = MessageBox.Show("¿Esta seguro que desea eliminar el registro de forma permanente?", "Eliminar registro", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                if(respuesta == DialogResult.Yes)
+                {
+                    seleccionado = (Articulo)dgvArticulos.CurrentRow.DataBoundItem;
+                    negocio.eliminar(seleccionado.Id);
+                    cargar();
+                }
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.ToString());
+            }
         }
     }
 }
