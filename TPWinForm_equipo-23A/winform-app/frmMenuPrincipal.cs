@@ -29,14 +29,19 @@ namespace winform_app
             {
                 listaArticulos = negocio.listar();
                 dgvArticulos.DataSource = listaArticulos;
-                dgvArticulos.Columns["Id"].Visible = false;
-                dgvArticulos.Columns["Imagen"].Visible = false;
+                ocultarColumnas();
             }
             catch (Exception ex)
             {
 
                 MessageBox.Show(ex.ToString());
             }
+        }
+
+        private void ocultarColumnas()
+        {
+            dgvArticulos.Columns["Id"].Visible = false;
+            dgvArticulos.Columns["Imagen"].Visible = false;
         }
 
         private void frmMenuPrincipal_Load(object sender, EventArgs e)
@@ -82,6 +87,25 @@ namespace winform_app
 
                 MessageBox.Show(ex.ToString());
             }
+        }
+
+        private void btnFiltro_Click(object sender, EventArgs e)
+        {
+            List<Articulo>listaFiltrada;
+            string filtro = txtFiltro.Text;
+
+            if (filtro != "")
+            {
+                listaFiltrada = listaArticulos.FindAll(x => x.Nombre.ToUpper().Contains(filtro.ToUpper()) || x.Codigo.ToUpper().Contains(filtro.ToUpper()));
+            }
+            else
+            {
+                listaFiltrada = listaArticulos;
+            }
+
+            dgvArticulos.DataSource = null;
+            dgvArticulos.DataSource = listaFiltrada;
+            ocultarColumnas();
         }
     }
 }
