@@ -37,5 +37,14 @@ namespace winform_app
             frmAltaArticulo alta = new frmAltaArticulo();
             alta.ShowDialog();
         }
+
+        private void btnModificar_Click(object sender, EventArgs e)
+        {
+            Articulo seleccionado;
+            seleccionado = (Articulo)dgvArticulos.CurrentRow.DataBoundItem;
+            frmAltaArticulo modificar = new frmAltaArticulo(seleccionado);
+            modificar.ShowDialog();
+
+        }
     }
 }
