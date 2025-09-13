@@ -1,4 +1,6 @@
-﻿using System;
+﻿using dominio;
+using negocio;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -15,6 +17,27 @@ namespace winform_app
         public frmMarcas()
         {
             InitializeComponent();
+        }
+
+        private List<Marca> listaMarcas;
+
+        private void cargar()
+        {
+            MarcaNegocio negocio = new MarcaNegocio();
+            try
+            {
+                listaMarcas = negocio.listar();
+                dgvMarcas.DataSource = listaMarcas;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+        }
+
+        private void frmMarcas_Load(object sender, EventArgs e)
+        {
+            cargar();
         }
     }
 }
