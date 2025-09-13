@@ -91,12 +91,27 @@ namespace winform_app
 
         private void btnFiltro_Click(object sender, EventArgs e)
         {
-            List<Articulo>listaFiltrada;
+            
+        }
+
+        private void txtFiltro_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            
+        }
+
+        private void txtFiltro_TextChanged(object sender, EventArgs e)
+        {
+            List<Articulo> listaFiltrada;
             string filtro = txtFiltro.Text;
 
-            if (filtro != "")
+            if (filtro.Length >= 3)
             {
-                listaFiltrada = listaArticulos.FindAll(x => x.Nombre.ToUpper().Contains(filtro.ToUpper()) || x.Codigo.ToUpper().Contains(filtro.ToUpper()));
+                listaFiltrada = listaArticulos.FindAll(x =>
+                    x.Nombre.ToUpper().Contains(filtro.ToUpper()) ||
+                    x.Codigo.ToUpper().Contains(filtro.ToUpper()) ||
+                    x.Descripcion.ToUpper().Contains(filtro.ToUpper()) ||
+                    x.Marca.Descripcion.ToUpper().Contains(filtro.ToUpper()) ||
+                    x.Categoria.Descripcion.ToUpper().Contains(filtro.ToUpper()));
             }
             else
             {
