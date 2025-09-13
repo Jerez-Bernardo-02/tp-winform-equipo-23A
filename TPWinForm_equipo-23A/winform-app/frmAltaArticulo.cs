@@ -29,13 +29,13 @@ namespace winform_app
 
         private void btnAceptar_Click(object sender, EventArgs e)
         {
-            //Articulo nuevo = new Articulo();
             ArticuloNegocio negocio = new ArticuloNegocio();
 
             try
             {
                 if (articulo == null)
                     articulo = new Articulo();
+
                 articulo.Codigo = txtCodigo.Text;
                 articulo.Nombre = txtNombre.Text;
                 articulo.Descripcion = txtDescripcion.Text;
