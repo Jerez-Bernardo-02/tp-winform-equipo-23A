@@ -41,6 +41,11 @@ namespace winform_app
                 articulo.Descripcion = txtDescripcion.Text;
                 articulo.Marca = (Marca)cboMarca.SelectedItem;
                 articulo.Categoria = (Categoria)cboCategoria.SelectedItem;
+                articulo.Precio = decimal.Parse(txtPrecio.Text);
+
+                Imagen imagen = new Imagen();
+                imagen.ImagenUrl = txtImagenUrl.Text;
+                articulo.listaImagenes.Add(imagen);
 
                 if (articulo.Id != 0)
                 {
@@ -88,6 +93,7 @@ namespace winform_app
                     txtDescripcion.Text = articulo.Descripcion;
                     cboMarca.SelectedValue = articulo.Marca.Id;
                     cboCategoria.SelectedValue = articulo.Categoria.Id;
+                    txtPrecio.Text = articulo.Precio.ToString();
                 }
             }
             catch (Exception ex)

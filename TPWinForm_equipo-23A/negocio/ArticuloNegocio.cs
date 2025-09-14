@@ -16,7 +16,7 @@ namespace negocio
 
             try
             {
-                datos.setearConsulta("Select A.Id, A.Codigo, A.Nombre, A.Descripcion, M.Id AS IdMarca, M.Descripcion AS Marca, C.Id As IdCategoria, C.Descripcion AS Categoria, I.ImagenUrl AS UrlImagen, A.Precio FROM ARTICULOS A, MARCAS M, CATEGORIAS C, IMAGENES I WHERE M.Id = A.IdMarca AND C.Id = A.IdCategoria AND I.IdArticulo = A.Id");
+                datos.setearConsulta("Select A.Id, A.Codigo, A.Nombre, A.Descripcion, M.Id AS IdMarca, M.Descripcion AS Marca, C.Id As IdCategoria, C.Descripcion AS Categoria, A.Precio FROM ARTICULOS A, MARCAS M, CATEGORIAS C WHERE M.Id = A.IdMarca AND C.Id = A.IdCategoria");
                 datos.ejecutarLectura();
 
                 while (datos.Lector.Read())
@@ -36,7 +36,6 @@ namespace negocio
                     aux.Precio = (decimal)datos.Lector["Precio"];
 
                     ImagenNegocio negocio = new ImagenNegocio();
-                    aux.listaImagenes = new List<Imagen>();
                     aux.listaImagenes = negocio.lista(aux.Id);
 
                     lista.Add(aux);
@@ -57,13 +56,20 @@ namespace negocio
         public void agregar(Articulo nuevo)
         {
             AccesoDatos datos = new AccesoDatos();
-
+            ImagenNegocio negocio = new ImagenNegocio();
             try
             {
-                datos.setearConsulta("INSERT INTO ARTICULOS (Codigo, Nombre, Descripcion, IdMarca, IdCategoria) VALUES ('" + nuevo.Codigo + "', '" + nuevo.Nombre + "', '" + nuevo.Descripcion + "', @idMarca, @idCategoria )");
-                datos.setearParametro("@idMarca", nuevo.Marca.Id);
-                datos.setearParametro("@idCategoria", nuevo.Categoria.Id);
-                datos.ejecutarAccion();
+                datos.setearConsulta(@"INSERT INTO ARTICULOS (Codigo, Nombre, Descripcion, IdMarca, IdCategoria, Precio) OUTPUT inserted.Id VALUES (@Codigo, @Nombre, @Descripcion, @IdMarca, @IdCategoria, @Precio)");
+                datos.setearParametro("@Codigo", nuevo.Codigo);
+                datos.setearParametro("@Nombre", nuevo.Nombre);
+                datos.setearParametro("@Descripcion", nuevo.Descripcion);
+                datos.setearParametro("@IdMarca", nuevo.Marca.Id);
+                datos.setearParametro("@IdCategoria", nuevo.Categoria.Id);
+                datos.setearParametro("@Precio", nuevo.Precio);
+
+                int ultimoId = (int)datos.ejecutarScalar();
+                nuevo.listaImagenes[0].IdArticulo = ultimoId;
+                negocio.agregar(nuevo.listaImagenes[0]);
             }
             catch (Exception ex)
             {
@@ -79,6 +85,7 @@ namespace negocio
         public void modificar(Articulo articulo)
         {
             AccesoDatos datos = new AccesoDatos();
+            ImagenNegocio negocio = new ImagenNegocio();
             try
             {
                 datos.setearConsulta("update ARTICULOS set Codigo = @codigo, Nombre = @nombre, Descripcion = @descripcion, IdMarca = @idMarca, IdCategoria = @idCategoria, Precio = @precio where Id = @id");
@@ -92,6 +99,8 @@ namespace negocio
 
                 datos.ejecutarAccion();
 
+                articulo.listaImagenes[0].IdArticulo = articulo.Id;
+                negocio.agregar(articulo.listaImagenes[0]);
             }
             catch (Exception ex)
             {

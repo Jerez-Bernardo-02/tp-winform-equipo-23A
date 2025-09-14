@@ -15,7 +15,6 @@ namespace winform_app
     public partial class frmArticulos : Form
     {
         private List<Articulo> listaArticulos;
-        private int tam;
         private int indice;
 
         public frmArticulos()
@@ -105,7 +104,7 @@ namespace winform_app
                 listaFiltrada = listaArticulos;
             }
 
-            //dgvArticulos.DataSource = null;
+            dgvArticulos.DataSource = null;
             dgvArticulos.DataSource = listaFiltrada;
             ocultarColumnas();
         }
@@ -113,7 +112,9 @@ namespace winform_app
         private void dgvArticulos_SelectionChanged(object sender, EventArgs e)
         {
             if (dgvArticulos.CurrentRow == null)
+            {
                 return;
+            }
 
             Articulo seleccionado = (Articulo)dgvArticulos.CurrentRow.DataBoundItem;
 
@@ -148,6 +149,8 @@ namespace winform_app
 
             btnAnterior.Enabled = false;
             btnSiguiente.Enabled = false;
+
+            int tam;
 
             tam = seleccionado.listaImagenes.Count - 1;
 
