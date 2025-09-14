@@ -174,5 +174,22 @@ namespace winform_app
             if ((e.KeyChar < 48 || e.KeyChar > 59) && e.KeyChar != 8)
                 e.Handled = true;
         }
+
+        private void txtImagenUrl_Leave(object sender, EventArgs e)
+        {
+            cargarImagen(txtImagenUrl.Text);
+        }
+
+        private void cargarImagen(string imagenUrl)
+        {
+            try
+            {
+                pbxAltaArticulo.Load(imagenUrl);
+            }
+            catch (Exception ex)
+            {
+                pbxAltaArticulo.Load("https://efectocolibri.com/wp-content/uploads/2021/01/placeholder.png");
+            }
+        }
     }
 }

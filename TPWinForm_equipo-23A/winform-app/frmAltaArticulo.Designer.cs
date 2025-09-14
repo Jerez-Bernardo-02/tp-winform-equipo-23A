@@ -44,6 +44,8 @@
             this.txtImagenUrl = new System.Windows.Forms.TextBox();
             this.lblPrecio = new System.Windows.Forms.Label();
             this.lblImagenUrl = new System.Windows.Forms.Label();
+            this.pbxAltaArticulo = new System.Windows.Forms.PictureBox();
+            ((System.ComponentModel.ISupportInitialize)(this.pbxAltaArticulo)).BeginInit();
             this.SuspendLayout();
             // 
             // lblCodigo
@@ -168,6 +170,7 @@
             this.txtImagenUrl.Name = "txtImagenUrl";
             this.txtImagenUrl.Size = new System.Drawing.Size(160, 20);
             this.txtImagenUrl.TabIndex = 13;
+            this.txtImagenUrl.Leave += new System.EventHandler(this.txtImagenUrl_Leave);
             // 
             // lblPrecio
             // 
@@ -187,11 +190,21 @@
             this.lblImagenUrl.TabIndex = 15;
             this.lblImagenUrl.Text = "Url:";
             // 
+            // pbxAltaArticulo
+            // 
+            this.pbxAltaArticulo.Location = new System.Drawing.Point(294, 22);
+            this.pbxAltaArticulo.Name = "pbxAltaArticulo";
+            this.pbxAltaArticulo.Size = new System.Drawing.Size(187, 190);
+            this.pbxAltaArticulo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pbxAltaArticulo.TabIndex = 16;
+            this.pbxAltaArticulo.TabStop = false;
+            // 
             // frmAltaArticulo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(287, 281);
+            this.ClientSize = new System.Drawing.Size(528, 281);
+            this.Controls.Add(this.pbxAltaArticulo);
             this.Controls.Add(this.lblImagenUrl);
             this.Controls.Add(this.lblPrecio);
             this.Controls.Add(this.txtImagenUrl);
@@ -208,12 +221,13 @@
             this.Controls.Add(this.lblDescripcion);
             this.Controls.Add(this.lblNombre);
             this.Controls.Add(this.lblCodigo);
-            this.MaximumSize = new System.Drawing.Size(303, 320);
-            this.MinimumSize = new System.Drawing.Size(303, 320);
+            this.MaximumSize = new System.Drawing.Size(544, 320);
+            this.MinimumSize = new System.Drawing.Size(544, 320);
             this.Name = "frmAltaArticulo";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "frmAltaArticulo";
             this.Load += new System.EventHandler(this.frmAltaArticulo_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.pbxAltaArticulo)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -237,5 +251,6 @@
         private System.Windows.Forms.TextBox txtImagenUrl;
         private System.Windows.Forms.Label lblPrecio;
         private System.Windows.Forms.Label lblImagenUrl;
+        private System.Windows.Forms.PictureBox pbxAltaArticulo;
     }
 }
