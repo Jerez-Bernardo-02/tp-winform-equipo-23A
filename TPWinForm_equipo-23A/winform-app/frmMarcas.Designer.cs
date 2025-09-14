@@ -71,6 +71,7 @@
             this.btnEliminarMarca.TabIndex = 19;
             this.btnEliminarMarca.Text = "Eliminar";
             this.btnEliminarMarca.UseVisualStyleBackColor = true;
+            this.btnEliminarMarca.Click += new System.EventHandler(this.btnEliminarMarca_Click);
             // 
             // btnModificarMarca
             // 
@@ -81,6 +82,7 @@
             this.btnModificarMarca.TabIndex = 18;
             this.btnModificarMarca.Text = "Modificar";
             this.btnModificarMarca.UseVisualStyleBackColor = true;
+            this.btnModificarMarca.Click += new System.EventHandler(this.btnModificarMarca_Click);
             // 
             // btnAgregarMarca
             // 
@@ -90,6 +92,7 @@
             this.btnAgregarMarca.TabIndex = 17;
             this.btnAgregarMarca.Text = "Agregar";
             this.btnAgregarMarca.UseVisualStyleBackColor = true;
+            this.btnAgregarMarca.Click += new System.EventHandler(this.btnAgregarMarca_Click);
             // 
             // dgvMarcas
             // 
