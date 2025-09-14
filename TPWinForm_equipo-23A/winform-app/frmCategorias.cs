@@ -28,7 +28,9 @@ namespace winform_app
             try
             {
                 listaCategorias = negocio.listar();
+                dgvCategorias.DataSource = null;
                 dgvCategorias.DataSource = listaCategorias;
+                dgvCategorias.Columns["Id"].Visible = false;
             }
             catch (Exception ex)
             {
@@ -41,5 +43,36 @@ namespace winform_app
             cargar();
         }
 
+        private void btnAgregarCategoria_Click(object sender, EventArgs e)
+        {
+            frmAltaCategoria alta = new frmAltaCategoria();
+            alta.ShowDialog();
+            cargar();
+        }
+
+        private void btnModificarCategoria_Click(object sender, EventArgs e)
+        {
+            if (dgvCategorias.CurrentRow == null) return;
+
+            Categoria seleccionada = (Categoria)dgvCategorias.CurrentRow.DataBoundItem;
+            frmAltaCategoria modificar = new frmAltaCategoria(seleccionada);
+            modificar.ShowDialog();
+            cargar();
+        }
+
+        private void btnEliminarCategoria_Click(object sender, EventArgs e)
+        {
+            if (dgvCategorias.CurrentRow == null) return;
+
+            CategoriaNegocio negocio = new CategoriaNegocio();
+            Categoria seleccionada = (Categoria)dgvCategorias.CurrentRow.DataBoundItem;
+
+            DialogResult respuesta = MessageBox.Show("¿Está seguro de eliminar la categoría?", "Eliminar Categoría", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+            if (respuesta == DialogResult.Yes)
+            {
+                negocio.eliminarCategoria(seleccionada.Id);
+                cargar();
+            }
+        }
     }
 }

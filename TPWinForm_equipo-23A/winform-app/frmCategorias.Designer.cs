@@ -71,6 +71,7 @@
             this.btnEliminarCategoria.TabIndex = 26;
             this.btnEliminarCategoria.Text = "Eliminar";
             this.btnEliminarCategoria.UseVisualStyleBackColor = true;
+            this.btnEliminarCategoria.Click += new System.EventHandler(this.btnEliminarCategoria_Click);
             // 
             // btnModificarCategoria
             // 
@@ -81,6 +82,7 @@
             this.btnModificarCategoria.TabIndex = 25;
             this.btnModificarCategoria.Text = "Modificar";
             this.btnModificarCategoria.UseVisualStyleBackColor = true;
+            this.btnModificarCategoria.Click += new System.EventHandler(this.btnModificarCategoria_Click);
             // 
             // btnAgregarCategoria
             // 
@@ -90,6 +92,7 @@
             this.btnAgregarCategoria.TabIndex = 24;
             this.btnAgregarCategoria.Text = "Agregar";
             this.btnAgregarCategoria.UseVisualStyleBackColor = true;
+            this.btnAgregarCategoria.Click += new System.EventHandler(this.btnAgregarCategoria_Click);
             // 
             // dgvCategorias
             // 

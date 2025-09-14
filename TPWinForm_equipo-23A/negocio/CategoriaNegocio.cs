@@ -65,12 +65,12 @@ namespace negocio
             try
             {
                 datos.setearConsulta("update CATEGORIAS set Descripcion = @descripcion where Id = @id");
-                datos.setearParametro("@descripcion", categoria.Id);
+                datos.setearParametro("@descripcion", categoria.Descripcion);
+                datos.setearParametro("@id", categoria.Id);
                 datos.ejecutarAccion();
             }
             catch (Exception ex)
             {
-
                 throw ex;
             }
             finally
