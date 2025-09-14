@@ -15,6 +15,8 @@ namespace winform_app
     public partial class frmArticulos : Form
     {
         private List<Articulo> listaArticulos;
+        private int tam;
+        private int indice;
 
         public frmArticulos()
         {
@@ -31,9 +33,8 @@ namespace winform_app
                 dgvArticulos.DataSource = listaArticulos;
                 ocultarColumnas();
             }
-            catch (Exception ex)
+            catch(Exception ex)
             {
-
                 MessageBox.Show(ex.ToString());
             }
         }
@@ -41,16 +42,12 @@ namespace winform_app
         private void ocultarColumnas()
         {
             dgvArticulos.Columns["Id"].Visible = false;
-            dgvArticulos.Columns["Imagen"].Visible = false;
         }
 
-        private void frmMenuPrincipal_Load(object sender, EventArgs e)
+        private void frmArticulos_Load(object sender, EventArgs e)
         {
             cargar();
         }
-
-        /// METODOS PARA LAS IMAGENES DEFINIR MAS ADELANTE
-        /// 
 
         private void btnAgregar_Click(object sender, EventArgs e)
         {
@@ -89,16 +86,6 @@ namespace winform_app
             }
         }
 
-        private void btnFiltro_Click(object sender, EventArgs e)
-        {
-            
-        }
-
-        private void txtFiltro_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            
-        }
-
         private void txtFiltro_TextChanged(object sender, EventArgs e)
         {
             List<Articulo> listaFiltrada;
@@ -118,9 +105,74 @@ namespace winform_app
                 listaFiltrada = listaArticulos;
             }
 
-            dgvArticulos.DataSource = null;
+            //dgvArticulos.DataSource = null;
             dgvArticulos.DataSource = listaFiltrada;
             ocultarColumnas();
+        }
+
+        private void dgvArticulos_SelectionChanged(object sender, EventArgs e)
+        {
+            if (dgvArticulos.CurrentRow == null)
+                return;
+
+            Articulo seleccionado = (Articulo)dgvArticulos.CurrentRow.DataBoundItem;
+
+            indice = 0;
+
+            mostrarImagen();
+        }
+
+        private void cargarImagen(string imagenUrl)
+        {
+            try
+            {
+                pbxArticulo.Load(imagenUrl);
+            }
+            catch (Exception ex)
+            {
+                pbxArticulo.Load("https://efectocolibri.com/wp-content/uploads/2021/01/placeholder.png");
+            }
+        }
+
+        private void mostrarImagen()
+        {
+            Articulo seleccionado = (Articulo)dgvArticulos.CurrentRow.DataBoundItem;
+
+            if (seleccionado == null || seleccionado.listaImagenes == null || seleccionado.listaImagenes.Count == 0)
+            {
+                pbxArticulo.Load("https://efectocolibri.com/wp-content/uploads/2021/01/placeholder.png");
+                return;
+            }
+
+            cargarImagen(seleccionado.listaImagenes[indice].ImagenUrl);
+
+            btnAnterior.Enabled = false;
+            btnSiguiente.Enabled = false;
+
+            tam = seleccionado.listaImagenes.Count - 1;
+
+            if(indice < tam)
+            {
+                btnSiguiente.Enabled = true;
+            }
+            
+            if(indice > 0)
+            {
+                btnAnterior.Enabled = true;
+            }
+
+        }
+
+        private void btnSiguiente_Click(object sender, EventArgs e)
+        {
+            indice++;
+            mostrarImagen();   
+        }
+
+        private void btnAnterior_Click(object sender, EventArgs e)
+        {
+            indice--;
+            mostrarImagen();
         }
     }
 }
