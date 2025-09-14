@@ -96,6 +96,7 @@
             // txtCodigo
             // 
             this.txtCodigo.Location = new System.Drawing.Point(84, 22);
+            this.txtCodigo.MaxLength = 50;
             this.txtCodigo.Name = "txtCodigo";
             this.txtCodigo.Size = new System.Drawing.Size(160, 20);
             this.txtCodigo.TabIndex = 5;
@@ -103,6 +104,7 @@
             // txtNombre
             // 
             this.txtNombre.Location = new System.Drawing.Point(84, 53);
+            this.txtNombre.MaxLength = 50;
             this.txtNombre.Name = "txtNombre";
             this.txtNombre.Size = new System.Drawing.Size(160, 20);
             this.txtNombre.TabIndex = 6;
@@ -110,6 +112,7 @@
             // txtDescripcion
             // 
             this.txtDescripcion.Location = new System.Drawing.Point(84, 81);
+            this.txtDescripcion.MaxLength = 150;
             this.txtDescripcion.Name = "txtDescripcion";
             this.txtDescripcion.Size = new System.Drawing.Size(160, 20);
             this.txtDescripcion.TabIndex = 7;
@@ -156,10 +159,12 @@
             this.txtPrecio.Name = "txtPrecio";
             this.txtPrecio.Size = new System.Drawing.Size(160, 20);
             this.txtPrecio.TabIndex = 12;
+            this.txtPrecio.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtPrecio_KeyPress);
             // 
             // txtImagenUrl
             // 
             this.txtImagenUrl.Location = new System.Drawing.Point(84, 192);
+            this.txtImagenUrl.MaxLength = 1000;
             this.txtImagenUrl.Name = "txtImagenUrl";
             this.txtImagenUrl.Size = new System.Drawing.Size(160, 20);
             this.txtImagenUrl.TabIndex = 13;

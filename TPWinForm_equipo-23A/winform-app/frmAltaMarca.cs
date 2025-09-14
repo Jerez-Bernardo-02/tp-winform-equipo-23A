@@ -65,6 +65,11 @@ namespace winform_app
 
         private void btnAceptar_Click_1(object sender, EventArgs e)
         {
+            while(espaciosVacios() == false)
+            {
+                return;
+            }
+
             try
             {
                 MarcaNegocio negocio = new MarcaNegocio();
@@ -96,6 +101,21 @@ namespace winform_app
         private void btnCancelar_Click_1(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private bool espaciosVacios()
+        {
+
+            if (txtDescripcion.Text == "")
+            {
+                txtDescripcion.BackColor = Color.Red;
+                return false;
+            }
+            else
+            {
+                txtDescripcion.BackColor = System.Drawing.SystemColors.Control;
+                return true;
+            }
         }
     }
 }

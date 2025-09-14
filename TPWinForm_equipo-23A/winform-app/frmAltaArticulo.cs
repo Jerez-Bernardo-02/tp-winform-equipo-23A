@@ -29,6 +29,11 @@ namespace winform_app
 
         private void btnAceptar_Click(object sender, EventArgs e)
         {
+            while(espaciosVacios() == false)
+            {
+                return;
+            }
+
             ArticuloNegocio negocio = new ArticuloNegocio();
 
             try
@@ -66,7 +71,6 @@ namespace winform_app
                 MessageBox.Show(ex.ToString());
             }
         }
-
         private void btnCancelar_Click(object sender, EventArgs e)
         {
             this.Close();
@@ -101,6 +105,74 @@ namespace winform_app
 
                 MessageBox.Show(ex.ToString());
             }
+        }
+
+        private bool espaciosVacios()
+        {
+            int cont = 0;
+
+            if (txtCodigo.Text == "")
+            {
+                txtCodigo.BackColor = Color.Red;
+                cont++;
+            }
+            else
+            {
+                txtCodigo.BackColor = System.Drawing.SystemColors.Control;
+            }
+
+            if (txtNombre.Text == "")
+            {
+                txtNombre.BackColor = Color.Red;
+                cont++;
+            }
+            else
+            {
+                txtNombre.BackColor = System.Drawing.SystemColors.Control;
+            }
+
+            if (txtDescripcion.Text == "")
+            {
+                txtDescripcion.BackColor = Color.Red;
+                cont++;
+            }
+            else
+            {
+                txtDescripcion.BackColor = System.Drawing.SystemColors.Control;
+            }
+
+            if (txtPrecio.Text == "")
+            {
+                txtPrecio.BackColor = Color.Red;
+                cont++;
+            }
+            else
+            {
+                txtPrecio.BackColor = System.Drawing.SystemColors.Control;
+            }
+
+            if (txtImagenUrl.Text == "")
+            {
+                txtImagenUrl.BackColor = Color.Red;
+                cont++;
+            }
+            else
+            {
+                txtImagenUrl.BackColor = System.Drawing.SystemColors.Control;
+            }
+
+            if(cont == 0)
+            {
+                return true;
+            }
+
+            return false;
+        }
+
+        private void txtPrecio_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if ((e.KeyChar < 48 || e.KeyChar > 59) && e.KeyChar != 8)
+                e.Handled = true;
         }
     }
 }

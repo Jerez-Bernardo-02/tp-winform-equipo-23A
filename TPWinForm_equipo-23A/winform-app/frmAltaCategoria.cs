@@ -37,6 +37,11 @@ namespace winform_app
         {
             CategoriaNegocio negocio = new CategoriaNegocio();
 
+            while (espaciosVacios() == false)
+            {
+                return;
+            }
+
             try
             {
                 if (categoria == null)
@@ -66,6 +71,21 @@ namespace winform_app
         private void btnCancelar_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private bool espaciosVacios()
+        {
+
+            if (txtDescripcion.Text == "")
+            {
+                txtDescripcion.BackColor = Color.Red;
+                return false;
+            }
+            else
+            {
+                txtDescripcion.BackColor = System.Drawing.SystemColors.Control;
+                return true;
+            }
         }
     }
 }
