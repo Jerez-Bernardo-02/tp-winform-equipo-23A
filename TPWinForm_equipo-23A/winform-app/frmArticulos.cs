@@ -52,6 +52,8 @@ namespace winform_app
         {
             frmAltaArticulo alta = new frmAltaArticulo();
             alta.ShowDialog();
+
+            cargar();
         }
 
         private void btnModificar_Click(object sender, EventArgs e)
@@ -61,6 +63,7 @@ namespace winform_app
             frmAltaArticulo modificar = new frmAltaArticulo(seleccionado);
             modificar.ShowDialog();
 
+            cargar();
         }
 
         private void btnEliminar_Click(object sender, EventArgs e)

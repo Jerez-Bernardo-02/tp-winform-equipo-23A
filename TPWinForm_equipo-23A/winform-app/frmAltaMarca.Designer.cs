@@ -80,7 +80,10 @@
             this.Controls.Add(this.btnCancelar);
             this.Controls.Add(this.btnAceptar);
             this.Controls.Add(this.lblDescripcion);
+            this.MaximumSize = new System.Drawing.Size(313, 150);
+            this.MinimumSize = new System.Drawing.Size(313, 150);
             this.Name = "frmAltaMarca";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "frmAltaMarca";
             this.Load += new System.EventHandler(this.frmAltaMarca_Load);
             this.ResumeLayout(false);
