@@ -33,9 +33,11 @@ namespace negocio
                     aux.Categoria = new Categoria();
                     aux.Categoria.Id = (int)(datos.Lector["IdCategoria"]);
                     aux.Categoria.Descripcion = (string)datos.Lector["Categoria"];
-                    aux.Imagen = new Imagen();
-                    aux.Imagen.UrlImagen = (string)datos.Lector["UrlImagen"];
                     aux.Precio = (decimal)datos.Lector["Precio"];
+
+                    ImagenNegocio negocio = new ImagenNegocio();
+                    aux.listaImagenes = new List<Imagen>();
+                    aux.listaImagenes = negocio.lista(aux.Id);
 
                     lista.Add(aux);
                 }
